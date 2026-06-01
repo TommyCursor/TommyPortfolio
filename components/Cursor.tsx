@@ -6,11 +6,14 @@ export default function Cursor() {
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
   const [hovered, setHovered] = useState(false)
+  const [isTouch, setIsTouch] = useState(true)
 
   const springX = useSpring(mouseX, { stiffness: 150, damping: 18, mass: 0.8 })
   const springY = useSpring(mouseY, { stiffness: 150, damping: 18, mass: 0.8 })
 
   useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none)').matches)
+
     const onMove = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
@@ -36,6 +39,8 @@ export default function Cursor() {
       document.removeEventListener('mouseout', onOut)
     }
   }, [mouseX, mouseY])
+
+  if (isTouch) return null
 
   return (
     <>

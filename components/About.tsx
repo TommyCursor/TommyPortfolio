@@ -34,7 +34,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="relative bg-[#F8F7F4] px-8 md:px-16 lg:px-24 py-28 border-t border-[#E5E4E0] overflow-hidden">
+    <section id="about" className="relative bg-[#F8F7F4] px-6 md:px-16 lg:px-24 py-20 md:py-28 border-t border-[#E5E4E0] overflow-hidden">
 
       {/* Large outlined background word */}
       <div
@@ -71,7 +71,7 @@ export default function About() {
           {/* Clip-path heading reveal */}
           <div className="overflow-hidden mb-8">
             <motion.h2
-              className="font-serif text-4xl md:text-5xl leading-tight text-[#111111]"
+              className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-[#111111]"
               initial={{ y: 80, opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}

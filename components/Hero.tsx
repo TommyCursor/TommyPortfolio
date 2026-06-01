@@ -103,7 +103,7 @@ export default function Hero() {
   }, [rawX, rawY])
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F8F7F4] px-8 md:px-16 lg:px-24 pt-24">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F8F7F4] px-6 md:px-16 lg:px-24 pt-20 md:pt-24">
 
       {/* Dynamic radial gradient — follows mouse */}
       <motion.div
@@ -206,7 +206,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-8 md:left-16 lg:left-24 flex items-center gap-3">
+      <div className="absolute bottom-10 left-6 md:left-16 lg:left-24 flex items-center gap-3">
         <motion.div
           className="w-px bg-[#111111] origin-top"
           style={{ height: 32 }}

@@ -15,7 +15,7 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contact" className="bg-[#F8F7F4] px-8 md:px-16 lg:px-24 py-28 border-t border-[#E5E4E0]">
+    <section id="contact" className="bg-[#F8F7F4] px-6 md:px-16 lg:px-24 py-20 md:py-28 border-t border-[#E5E4E0]">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start" ref={ref}>
         {/* Left */}
         <div>
@@ -28,7 +28,7 @@ export default function Contact() {
             Let&apos;s Talk
           </motion.p>
           <motion.h2
-            className="font-serif text-5xl md:text-6xl leading-tight text-[#111111] mb-6"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-[#111111] mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -66,14 +66,14 @@ export default function Contact() {
             <a
               key={item.label}
               href={item.href}
-              className={`flex items-center justify-between py-5 group ${
+              className={`flex items-start sm:items-center justify-between py-5 gap-4 group ${
                 i < contacts.length - 1 ? 'border-b border-[#E5E4E0]' : ''
               }`}
             >
               <span className="font-sans text-xs tracking-[0.15em] uppercase text-[#888888]">{item.label}</span>
-              <span className="font-sans text-sm text-[#111111] flex items-center gap-2">
+              <span className="font-sans text-sm text-[#111111] flex items-center gap-2 text-right break-all sm:break-normal">
                 {item.value}
-                <span className="transition-transform duration-200 group-hover:translate-x-1 inline-block text-[#888888]">
+                <span className="transition-transform duration-200 group-hover:translate-x-1 inline-block text-[#888888] shrink-0">
                   →
                 </span>
               </span>
