@@ -265,9 +265,9 @@ export default function LampReveal({ onComplete }: { onComplete: () => void }) {
       />
 
       {/* ── Lamp ───────────────────────────────────────── */}
+      <div className="absolute left-1/2 top-0 -translate-x-1/2">
       <motion.div
-        className="absolute"
-        style={{ left: '50%', top: 0, transform: 'translateX(-50%)', transformOrigin: '50% 0%' }}
+        style={{ transformOrigin: '50% 0%' }}
         animate={
           stage === 'pulling' || stage === 'flickering'
             ? { rotate: [-16, 14, -10, 7, -4, 2, -1, 0] }
@@ -297,6 +297,7 @@ export default function LampReveal({ onComplete }: { onComplete: () => void }) {
 
         <LampSVG glowOpacity={glowOpacity} ropeState={ropeState} onPull={handlePull} />
       </motion.div>
+      </div>
 
       {/* ── Floor glow — casts light on the ground ──────── */}
       <AnimatePresence>

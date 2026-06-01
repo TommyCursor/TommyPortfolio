@@ -177,9 +177,9 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
           {/* ── Terminal panel ────────────────────────────── */}
           <motion.div
-            className="absolute left-1/2 top-1/2"
+            className="absolute left-1/2 bottom-8 sm:bottom-12"
             style={{
-              transform: 'translate(-50%, -50%)',
+              transform: 'translateX(-50%)',
               width: 'min(640px, 90vw)',
               background: 'rgba(0,4,0,0.88)',
               border: '1px solid #003a00',
