@@ -24,146 +24,243 @@ function LampSVG({
   ropeState: 'idle' | 'pulling'
   onPull: () => void
 }) {
+  const lit = glowOpacity > 0
   return (
-    <svg width="180" height="580" viewBox="-90 0 180 580" style={{ overflow: 'visible' }}>
+    <svg width="200" height="600" viewBox="-100 0 200 600" style={{ overflow: 'visible' }}>
       <defs>
-        <radialGradient id="bulbCore" cx="50%" cy="70%" r="60%">
-          <stop offset="0%"   stopColor="#FFFDE0" stopOpacity="1" />
-          <stop offset="40%"  stopColor="#FFD060" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#FF8800" stopOpacity="0" />
+        {/* Ceiling mount metal */}
+        <linearGradient id="ceilGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#3a3a3a" />
+          <stop offset="100%" stopColor="#111111" />
+        </linearGradient>
+        {/* Shade outer — dark charcoal with subtle side shading */}
+        <linearGradient id="shadeOuter" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#0c0c0c" />
+          <stop offset="22%"  stopColor="#1e1e1e" />
+          <stop offset="50%"  stopColor="#191919" />
+          <stop offset="78%"  stopColor="#1e1e1e" />
+          <stop offset="100%" stopColor="#0c0c0c" />
+        </linearGradient>
+        {/* Metallic highlight on left face */}
+        <linearGradient id="shadeSheen" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#3c3c3c" stopOpacity="1" />
+          <stop offset="18%"  stopColor="#2a2a2a" stopOpacity="0.5" />
+          <stop offset="40%"  stopColor="#1a1a1a" stopOpacity="0" />
+        </linearGradient>
+        {/* Rim metallic */}
+        <linearGradient id="rimGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#383838" />
+          <stop offset="50%"  stopColor="#202020" />
+          <stop offset="100%" stopColor="#141414" />
+        </linearGradient>
+        {/* Edison glass — dark amber unlit */}
+        <radialGradient id="bulbGlass" cx="38%" cy="32%" r="62%">
+          <stop offset="0%"   stopColor="#2e1c08" stopOpacity="0.85" />
+          <stop offset="55%"  stopColor="#1a1005" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#0d0802" stopOpacity="0.5"  />
         </radialGradient>
-        <radialGradient id="shadeGlow" cx="50%" cy="0%" r="100%">
-          <stop offset="0%"   stopColor="#FFF4A0" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="#FFF4A0" stopOpacity="0" />
+        {/* Edison glass lit */}
+        <radialGradient id="bulbGlassLit" cx="38%" cy="32%" r="62%">
+          <stop offset="0%"   stopColor="#FFFDE0" stopOpacity="1"   />
+          <stop offset="30%"  stopColor="#FFD060" stopOpacity="0.9" />
+          <stop offset="70%"  stopColor="#FF9010" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#FF6000" stopOpacity="0"   />
         </radialGradient>
+        {/* Halo */}
         <radialGradient id="haloGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#FFE060" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#FFE060" stopOpacity="0" />
+          <stop offset="0%"   stopColor="#FFD050" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="#FF8000" stopOpacity="0"    />
         </radialGradient>
+        {/* Light cone */}
+        <radialGradient id="shadeGlow" cx="50%" cy="0%" r="100%">
+          <stop offset="0%"   stopColor="#FFF4A0" stopOpacity="0.28" />
+          <stop offset="60%"  stopColor="#FFD060" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="#FFA000" stopOpacity="0"    />
+        </radialGradient>
+        {/* Rope */}
+        <linearGradient id="ropeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#4a3018" />
+          <stop offset="40%"  stopColor="#9a7848" />
+          <stop offset="100%" stopColor="#4a3018" />
+        </linearGradient>
+        {/* Bead wood */}
+        <linearGradient id="beadGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#3e2008" />
+          <stop offset="28%"  stopColor="#a07040" />
+          <stop offset="55%"  stopColor="#8b5c28" />
+          <stop offset="100%" stopColor="#3e2008" />
+        </linearGradient>
       </defs>
 
-      {/* ── Ceiling fixture ──────────────────────────── */}
-      <rect x="-35" y="0" width="70" height="6" rx="3" fill="#1a1a1a" />
-      <ellipse cx="0" cy="10" rx="22" ry="8" fill="#222" />
-      <ellipse cx="0" cy="10" rx="16" ry="5" fill="#2c2c2c" />
+      {/* ── Ceiling plate ─────────────────────────────── */}
+      <rect x="-44" y="0" width="88" height="9" rx="4.5" fill="url(#ceilGrad)" />
+      {/* Screw details */}
+      <circle cx="-22" cy="4.5" r="2.2" fill="#0d0d0d" />
+      <circle cx="22"  cy="4.5" r="2.2" fill="#0d0d0d" />
+      <line x1="-23.5" y1="4.5" x2="-20.5" y2="4.5" stroke="#1a1a1a" strokeWidth="0.7" />
+      <line x1="-22" y1="3" x2="-22" y2="6" stroke="#1a1a1a" strokeWidth="0.7" />
+      <line x1="20.5" y1="4.5" x2="23.5" y2="4.5" stroke="#1a1a1a" strokeWidth="0.7" />
+      <line x1="22" y1="3" x2="22" y2="6" stroke="#1a1a1a" strokeWidth="0.7" />
+      {/* Canopy */}
+      <ellipse cx="0" cy="14"  rx="26" ry="10" fill="#1e1e1e" />
+      <ellipse cx="0" cy="14"  rx="19" ry="7"  fill="#2a2a2a" />
+      <ellipse cx="0" cy="11"  rx="14" ry="4"  fill="#303030" />
 
-      {/* ── Electrical cord ──────────────────────────── */}
-      <line x1="0" y1="18" x2="0" y2="138" stroke="#1e1e1e" strokeWidth="3" />
-      <line x1="0" y1="18" x2="0" y2="138" stroke="#2a2a2a" strokeWidth="1.5" strokeDasharray="4 6" />
-
-      {/* ── Lamp shade ───────────────────────────────── */}
-      {/* Outer shade — bell */}
+      {/* ── Twisted cord ──────────────────────────────── */}
+      {/* Main cord body */}
+      <path d="M 0,22 L 0,144" stroke="#1c1c1c" strokeWidth="4" strokeLinecap="round" />
+      {/* Twist highlight — left strand */}
       <path
-        d="M -20,138 C -26,168 -55,228 -68,272 C -74,294 -76,305 -76,310 L 76,310 C 76,305 74,294 68,272 C 55,228 26,168 20,138 Z"
-        fill="#161616"
+        d="M -1.5,22 C -1.5,35 1.5,40 1.5,50 C 1.5,60 -1.5,65 -1.5,75 C -1.5,85 1.5,90 1.5,100 C 1.5,110 -1.5,115 -1.5,125 C -1.5,135 1.5,140 1.5,144"
+        stroke="#2e2e2e" strokeWidth="1.4" fill="none" strokeLinecap="round"
       />
-      {/* Inner shade slightly lighter */}
+      {/* Twist highlight — right strand */}
       <path
-        d="M -16,142 C -21,170 -48,230 -60,272 C -65,292 -67,304 -67,309 L 67,309 C 67,304 65,292 60,272 C 48,230 21,170 16,142 Z"
-        fill="#1c1c1c"
-      />
-      {/* Decorative band */}
-      <path
-        d="M -38,196 L -46,218 L 46,218 L 38,196 Z"
-        fill="none" stroke="#232323" strokeWidth="1"
-      />
-      <path
-        d="M -50,242 L -56,262 L 56,262 L 50,242 Z"
-        fill="none" stroke="#212121" strokeWidth="0.8"
+        d="M 1.5,22 C 1.5,35 -1.5,40 -1.5,50 C -1.5,60 1.5,65 1.5,75 C 1.5,85 -1.5,90 -1.5,100 C -1.5,110 1.5,115 1.5,125 C 1.5,135 -1.5,140 -1.5,144"
+        stroke="#2e2e2e" strokeWidth="1.4" fill="none" strokeLinecap="round"
       />
 
-      {/* Top rim */}
-      <ellipse cx="0" cy="138" rx="20" ry="6"  fill="#222" />
-      <ellipse cx="0" cy="138" rx="15" ry="4"  fill="#2e2e2e" />
+      {/* ── Lamp shade ────────────────────────────────── */}
+      {/* Shadow/depth behind shade */}
+      <path
+        d="M -22,144 C -28,176 -58,238 -72,286 C -78,310 -80,322 -80,328 L 80,328 C 80,322 78,310 72,286 C 58,238 28,176 22,144 Z"
+        fill="#0a0a0a" opacity="0.8"
+      />
+      {/* Shade body */}
+      <path
+        d="M -20,144 C -26,174 -55,234 -69,280 C -75,303 -77,315 -77,320 L 77,320 C 77,315 75,303 69,280 C 55,234 26,174 20,144 Z"
+        fill="url(#shadeOuter)"
+      />
+      {/* Left-face metallic sheen */}
+      <path
+        d="M -20,144 C -26,174 -55,234 -69,280 C -75,303 -77,315 -77,320 L -10,320 C -10,315 -9,303 -5,280 C 5,234 10,174 8,144 Z"
+        fill="url(#shadeSheen)"
+      />
+      {/* Subtle vertical seams */}
+      <line x1="-32" y1="172" x2="-52" y2="302" stroke="#111" strokeWidth="0.6" opacity="0.6" />
+      <line x1="32"  y1="172" x2="52"  y2="302" stroke="#111" strokeWidth="0.6" opacity="0.6" />
+      {/* Decorative raised bands */}
+      <path d="M -40,202 L -50,228 L 50,228 L 40,202 Z" fill="none" stroke="#282828" strokeWidth="1.2" />
+      <path d="M -54,252 L -61,274 L 61,274 L 54,252 Z" fill="none" stroke="#252525" strokeWidth="1"   />
+
+      {/* Top collar */}
+      <ellipse cx="0" cy="144" rx="21" ry="7"  fill="url(#rimGrad)" />
+      <ellipse cx="0" cy="142" rx="16" ry="4.5" fill="#303030" />
+      {/* Collar highlight */}
+      <path d="M -14,140 A 16 4.5 0 0 1 14,140" stroke="#454545" strokeWidth="1" fill="none" />
 
       {/* Bottom rim */}
-      <ellipse cx="0" cy="310" rx="76"  ry="11" fill="#1e1e1e" />
-      <ellipse cx="0" cy="310" rx="72"  ry="8"  fill="#242424" />
+      <ellipse cx="0" cy="320" rx="78"  ry="13" fill="url(#rimGrad)" />
+      <ellipse cx="0" cy="319" rx="74"  ry="9"  fill="#222222" />
+      {/* Rim highlight arc */}
+      <path d="M -62,316 A 74 9 0 0 1 62,316" stroke="#3a3a3a" strokeWidth="1.2" fill="none" />
 
       {/* ── Edison bulb ───────────────────────────────── */}
-      <ellipse cx="0" cy="210" rx="15" ry="24" fill="#141414" />
-      <ellipse cx="0" cy="226" rx="12" ry="9"  fill="#181818" />
-      {/* Filament detail */}
-      <path d="M -5,204 C -2,210 2,215 0,221 C -2,226 2,231 0,236"
-        stroke="#1e1e1e" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      {/* Glass envelope — teardrop */}
+      <path
+        d="M -13,158 C -13,158 -18,178 -18,200 C -18,222 -10,240 0,244 C 10,240 18,222 18,200 C 18,178 13,158 13,158 Z"
+        fill="url(#bulbGlass)"
+      />
+      {/* Base collar of bulb */}
+      <rect x="-9" y="155" width="18" height="8" rx="2" fill="#181818" />
+      {/* Filament coil — dark when off */}
+      <path
+        d="M -4,196 C -2,202 4,204 2,210 C 0,216 -4,218 -2,224 C 0,230 4,232 2,238"
+        stroke={lit ? '#FFE080' : '#1e1e1e'}
+        strokeWidth={lit ? 1.6 : 1.2}
+        fill="none"
+        strokeLinecap="round"
+        style={{ filter: lit ? 'drop-shadow(0 0 3px #FFD050)' : 'none' }}
+      />
+      {/* Filament support wires */}
+      <line x1="-4" y1="196" x2="-4" y2="242" stroke={lit ? '#555' : '#1a1a1a'} strokeWidth="0.8" />
+      <line x1="4"  y1="196" x2="4"  y2="242" stroke={lit ? '#555' : '#1a1a1a'} strokeWidth="0.8" />
 
-      {/* ── GLOW layers — controlled by glowOpacity ───── */}
+      {/* ── GLOW layers ───────────────────────────────── */}
       <g opacity={glowOpacity}>
-        {/* Halo around lamp */}
-        <ellipse cx="0" cy="224" rx="80"  ry="100" fill="url(#haloGlow)" />
-        {/* Bulb filament glow */}
-        <ellipse cx="0" cy="210" rx="17"  ry="27" fill="#FFFDE0" opacity="0.65" />
-        <ellipse cx="0" cy="228" rx="13"  ry="10" fill="#FFEE80" opacity="0.5" />
+        {/* Bulb lit glass */}
+        <path
+          d="M -13,158 C -13,158 -18,178 -18,200 C -18,222 -10,240 0,244 C 10,240 18,222 18,200 C 18,178 13,158 13,158 Z"
+          fill="url(#bulbGlassLit)"
+        />
+        {/* Outer halo */}
+        <ellipse cx="0" cy="210" rx="90" ry="110" fill="url(#haloGlow)" />
+        {/* Close amber bloom */}
+        <ellipse cx="0" cy="200" rx="32" ry="42"  fill="#FFD050" opacity="0.12" />
         {/* Glow through bottom opening */}
-        <ellipse cx="0" cy="310" rx="70"  ry="9"  fill="url(#bulbCore)" />
+        <ellipse cx="0" cy="320" rx="72" ry="10"  fill="#FFD060" opacity="0.35" />
+        <ellipse cx="0" cy="322" rx="55" ry="7"   fill="#FFFDE0" opacity="0.25" />
         {/* Inner shade warm tint */}
         <path
-          d="M -14,145 C -19,172 -45,232 -58,272 C -62,291 -64,303 -64,308 L 64,308 C 64,303 62,291 58,272 C 45,232 19,172 14,145 Z"
-          fill="#FFF4A0" opacity="0.06"
+          d="M -16,148 C -22,176 -50,236 -62,280 C -67,302 -69,314 -69,319 L 69,319 C 69,314 67,302 62,280 C 50,236 22,176 16,148 Z"
+          fill="#FFF4A0" opacity="0.07"
         />
-        {/* Cone of light below shade */}
-        <path d="M -76,318 L -340,580 L 340,580 L 76,318 Z" fill="url(#shadeGlow)" />
+        {/* Wide light cone below */}
+        <path d="M -77,328 L -380,600 L 380,600 L 77,328 Z" fill="url(#shadeGlow)" />
+        {/* Rim glow ring */}
+        <ellipse cx="0" cy="320" rx="78" ry="13" fill="#FFB030" opacity="0.08" />
       </g>
 
-      {/* ── Pull rope ────────────────────────────────── */}
+      {/* ── Pull rope ─────────────────────────────────── */}
       <motion.g
-        animate={ropeState === 'pulling' ? { y: [0, 58, -18, 12, -6, 3, -1, 0] } : { y: 0 }}
+        animate={ropeState === 'pulling' ? { y: [0, 62, -20, 14, -7, 3, -1, 0] } : { y: 0 }}
         transition={ropeState === 'pulling'
           ? { duration: 1.4, ease: [0.34, 1.56, 0.64, 1] }
           : { type: 'spring', stiffness: 300, damping: 20 }}
       >
-        {/* Rope body — S-curve braid */}
-        <motion.path
-          d="M 0,318 C 6,338 -6,358 0,378 C 6,398 -6,418 0,438 C 6,458 -6,478 0,498 C 4,512 -3,525 0,535"
-          stroke="#9B8060"
-          strokeWidth="5.5"
-          fill="none"
-          strokeLinecap="round"
-          whileHover={{ stroke: '#C4A878' }}
-          style={{ cursor: 'pointer' }}
-          onClick={onPull}
+        {/* Rope shadow */}
+        <path
+          d="M 2,328 C 8,350 -4,372 2,394 C 8,416 -4,438 2,460 C 8,482 -4,502 2,518 C 5,530 -2,540 2,550"
+          stroke="#1a1208" strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.5"
         />
-        {/* Braid texture marks */}
-        {[330, 348, 366, 384, 402, 420, 438, 456, 474, 492, 508, 522].map((y, i) => (
+        {/* Rope main body */}
+        <path
+          d="M 0,328 C 6,350 -6,372 0,394 C 6,416 -6,438 0,460 C 6,482 -6,502 0,518 C 4,530 -3,540 0,550"
+          stroke="url(#ropeGrad)" strokeWidth="6" fill="none" strokeLinecap="round"
+          style={{ cursor: 'pointer' }} onClick={onPull}
+        />
+        {/* Twist marks */}
+        {[338,352,366,380,394,408,422,436,450,464,478,492,506,520,534].map((y, i) => (
           <line
             key={y}
-            x1={i % 2 === 0 ? -5 : 5}
-            y1={y}
-            x2={i % 2 === 0 ? 5 : -5}
-            y2={y + 10}
-            stroke="#7A6040"
-            strokeWidth="2"
-            opacity="0.55"
+            x1={i % 2 === 0 ? -4 : 4} y1={y}
+            x2={i % 2 === 0 ? 4  : -4} y2={y + 9}
+            stroke="#6a4820" strokeWidth="1.8" opacity="0.6"
             style={{ pointerEvents: 'none' }}
           />
         ))}
+        {/* Rope highlight strand */}
+        <path
+          d="M 1,328 C 4,350 -2,372 1,394 C 4,416 -2,438 1,460 C 4,482 -2,502 1,518"
+          stroke="#c49858" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.4"
+          style={{ pointerEvents: 'none' }}
+        />
 
         {/* Wooden pull bead */}
         <motion.g
           onClick={onPull}
           style={{ cursor: 'pointer' }}
-          whileHover={{ scale: 1.15 }}
+          whileHover={{ scale: 1.12 }}
           transition={{ type: 'spring', stiffness: 400, damping: 18 }}
         >
-          {/* Knot above bead */}
-          <ellipse cx="0" cy="540" rx="7"  ry="5"  fill="#5A3E18" />
+          {/* Knot */}
+          <ellipse cx="0" cy="555" rx="8"  ry="5.5" fill="#3a2208" />
+          <ellipse cx="0" cy="553" rx="6"  ry="3.5" fill="#4e2e10" />
           {/* Bead body */}
-          <ellipse cx="0" cy="553" rx="12" ry="15" fill="#8B6030" />
-          {/* Grain highlight */}
-          <ellipse cx="-3" cy="549" rx="4"  ry="7"  fill="#A87848" opacity="0.5" />
-          <ellipse cx="3"  cy="558" rx="3"  ry="5"  fill="#6A4820" opacity="0.4" />
-          {/* Rim grooves */}
-          <ellipse cx="0" cy="544" rx="10" ry="3"  fill="#4A3010" opacity="0.8" />
-          <ellipse cx="0" cy="567" rx="10" ry="3"  fill="#4A3010" opacity="0.8" />
+          <ellipse cx="0" cy="570" rx="14" ry="17"  fill="url(#beadGrad)" />
+          {/* Grain lines */}
+          <path d="M -9,562 C -6,568 -9,574 -7,580" stroke="#5a3018" strokeWidth="1"   fill="none" opacity="0.5" />
+          <path d="M -4,560 C -2,566 -5,572 -3,580" stroke="#a07840" strokeWidth="0.8" fill="none" opacity="0.4" />
+          <path d="M  5,561 C  3,568  6,573  4,580" stroke="#5a3018" strokeWidth="1"   fill="none" opacity="0.5" />
+          {/* Highlight */}
+          <ellipse cx="-4" cy="563" rx="4.5" ry="6" fill="#c49060" opacity="0.35" />
+          {/* Top and bottom grooves */}
+          <ellipse cx="0" cy="555" rx="11" ry="3.5" fill="#2a1608" opacity="0.85" />
+          <ellipse cx="0" cy="586" rx="11" ry="3.5" fill="#2a1608" opacity="0.85" />
         </motion.g>
 
-        {/* Wide invisible hit area */}
-        <rect
-          x="-26" y="314" width="52" height="270"
-          fill="transparent"
-          style={{ cursor: 'pointer' }}
-          onClick={onPull}
-        />
+        {/* Invisible wide hit zone */}
+        <rect x="-28" y="324" width="56" height="280" fill="transparent" style={{ cursor: 'pointer' }} onClick={onPull} />
       </motion.g>
     </svg>
   )
@@ -284,8 +381,8 @@ export default function LampReveal({ onComplete }: { onComplete: () => void }) {
           <motion.div
             className="absolute pointer-events-none"
             style={{
-              left: '50%', top: 200,
-              width: 500, height: 500,
+              left: '50%', top: 210,
+              width: 520, height: 520,
               transform: 'translate(-50%, -50%)',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(255,220,80,0.12) 0%, transparent 65%)',
@@ -346,7 +443,7 @@ export default function LampReveal({ onComplete }: { onComplete: () => void }) {
           className="absolute pointer-events-none rounded-full"
           style={{
             left: '50%',
-            top: 310,
+            top: 320,
             background: 'radial-gradient(circle, #FFFEF5 0%, #FDF9EC 25%, #FAF6E6 55%, #F8F7F4 80%)',
             zIndex: 9,
           }}

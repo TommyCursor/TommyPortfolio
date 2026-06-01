@@ -176,11 +176,10 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           />
 
           {/* ── Terminal panel ────────────────────────────── */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 sm:bottom-12" style={{ width: 'min(640px, 90vw)' }}>
           <motion.div
-            className="absolute left-1/2 bottom-8 sm:bottom-12"
             style={{
-              transform: 'translateX(-50%)',
-              width: 'min(640px, 90vw)',
+              width: '100%',
               background: 'rgba(0,4,0,0.88)',
               border: '1px solid #003a00',
               padding: '28px 32px',
@@ -286,6 +285,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               </div>
             </div>
           </motion.div>
+          </div>
 
           {/* Bottom system info */}
           <motion.div
