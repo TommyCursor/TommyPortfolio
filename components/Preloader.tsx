@@ -24,7 +24,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
   // ── Lock scroll ──────────────────────────────────────────────────────────
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    const lenis = (window as Record<string, unknown>).__lenis as
+    const lenis = (window as unknown as Record<string, unknown>).__lenis as
       | { stop: () => void; start: () => void }
       | undefined
     lenis?.stop()

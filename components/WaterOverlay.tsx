@@ -267,7 +267,7 @@ export default function WaterOverlay({ onDrained }: { onDrained: () => void }) {
 
       // Sync the backdrop-filter div to the same shape
       backdrop.style.clipPath         = `path('${pathStr}')`
-      backdrop.style.webkitClipPath   = `path('${pathStr}')`
+      ;(backdrop.style as unknown as Record<string, string>).webkitClipPath = `path('${pathStr}')`
 
       // ── Draw inside water shape ──────────────────────────
       const p2d = new Path2D(pathStr)
