@@ -2,6 +2,8 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+const AVATAR = 'https://avatars.githubusercontent.com/u/256695225?v=4'
+
 const devSkills = [
   'Next.js', 'TypeScript', 'React', 'Node.js', 'Supabase',
   'AI Integration', 'PostgreSQL', 'REST APIs', 'Framer Motion', 'Stripe',
@@ -63,11 +65,32 @@ export default function About() {
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start relative z-10">
         {/* Left */}
         <div ref={ref}>
+          {/* Photo with gold offset frame */}
+          <motion.div
+            className="relative mb-10 w-36 h-36 md:w-48 md:h-48"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Gold offset border — bottom-right */}
+            <div
+              className="absolute -bottom-3 -right-3 w-full h-full pointer-events-none"
+              style={{ border: '1.5px solid #C5A55A', opacity: 0.55 }}
+            />
+            {/* Photo */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={AVATAR}
+              alt="Tommy Adeyinka"
+              className="w-full h-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-500"
+            />
+          </motion.div>
+
           <motion.p
             className="font-sans text-xs tracking-[0.2em] uppercase text-[#888888] mb-4"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             About
           </motion.p>
@@ -77,7 +100,7 @@ export default function About() {
               className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-[#111111]"
               initial={{ y: 80, opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
               One Person.<br />Three Disciplines.
             </motion.h2>
@@ -87,7 +110,7 @@ export default function About() {
             className="font-sans text-[#555555] leading-relaxed mb-5 text-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             Most developers stop at shipping. Most marketers can&apos;t read code. Most automation consultants
             can&apos;t build the product they&apos;re automating. I do all three — and that gap is where real
@@ -97,14 +120,14 @@ export default function About() {
             className="font-sans text-[#888888] leading-relaxed text-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             I build production-grade applications, engineer the growth systems that bring users in, and wire up
             the automations that keep everything running — all without the overhead of three separate agencies.
           </motion.p>
         </div>
 
-        {/* Right */}
+        {/* Right — skills */}
         <div>
           <p className="font-sans text-xs tracking-[0.2em] uppercase text-[#888888] mb-4">Development</p>
           <div className="flex flex-wrap gap-2 mb-8">
