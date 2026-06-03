@@ -7,16 +7,16 @@ const items = [
   'TECHNICAL SEO',
   'AI INTEGRATION',
   'NEXT.JS · SUPABASE',
-  'PROGRAMMATIC SEO',
+  'NO-CODE AUTOMATION',
   'SAAS PLATFORMS',
-  'CORE WEB VITALS',
+  'N8N · ZAPIER · MAKE',
 ]
 
 export default function Marquee() {
   const doubled = [...items, ...items]
 
   return (
-    <div className="bg-[#111111] py-5 overflow-hidden">
+    <div className="bg-[#000000] py-5 overflow-hidden border-t border-b border-[#0d2200]">
       <motion.div
         className="flex items-center"
         style={{ width: 'max-content' }}
@@ -26,10 +26,10 @@ export default function Marquee() {
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="flex items-center font-sans text-[10px] tracking-[0.3em] uppercase text-[#3a3a3a] px-10 shrink-0"
+            className="flex items-center font-sans text-[10px] tracking-[0.3em] uppercase text-[#1a3a1a] px-10 shrink-0"
           >
             {item}
-            <span className="ml-10 text-[#C5A55A] text-sm">✦</span>
+            <span className="ml-10 text-[#FF0040] text-sm">✦</span>
           </span>
         ))}
       </motion.div>

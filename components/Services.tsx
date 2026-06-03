@@ -6,24 +6,23 @@ const services = [
   {
     number: '01',
     title: 'Full-Stack Development',
-    description:
-      'Production-ready web applications built for scale — Next.js SaaS platforms, AI-powered tools, REST APIs, and e-commerce solutions that ship fast and perform faster.',
+    description: 'Production-ready web applications built for scale — Next.js SaaS platforms, AI-powered tools, REST APIs, and e-commerce solutions that ship fast and perform faster.',
     tags: ['Next.js', 'TypeScript', 'Node.js', 'Supabase', 'AI Integration', 'SaaS', 'E-commerce'],
+    red: false,
   },
   {
     number: '02',
     title: 'Digital Marketing & SEO',
-    description:
-      'Organic growth systems that compound — technical SEO audits, programmatic content at scale, Core Web Vitals optimisation, and conversion funnels built to turn traffic into revenue.',
+    description: 'Organic growth systems that compound — technical SEO audits, programmatic content at scale, Core Web Vitals optimisation, and conversion funnels built to turn traffic into revenue.',
     tags: ['Technical SEO', 'Programmatic SEO', 'Core Web Vitals', 'GTM', 'Conversion Funnels', 'Analytics'],
+    red: false,
   },
   {
     number: '03',
     title: 'No-Code Automation',
-    description:
-      'Connect your tools, eliminate repetitive work, and build systems that run while you sleep — Zapier, n8n, and Make.com workflows tailored for non-technical teams who want to move faster.',
+    description: 'Connect your tools, eliminate repetitive work, and build systems that run while you sleep — Zapier, n8n, and Make.com workflows tailored for non-technical teams who want to move faster.',
     tags: ['n8n', 'Zapier', 'Make.com', 'Webhooks', 'API Integrations', 'Airtable'],
-    gold: true,
+    red: true,
   },
 ]
 
@@ -32,10 +31,10 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="services" className="bg-[#111111] px-6 md:px-16 lg:px-24 py-20 md:py-28">
+    <section id="services" className="bg-[#000000] px-6 md:px-16 lg:px-24 py-20 md:py-28">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.p
-          className="font-sans text-xs tracking-[0.2em] uppercase text-[#555555] mb-4"
+          className="font-sans text-xs tracking-[0.2em] uppercase text-[#1a3a1a] mb-4"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
@@ -45,7 +44,7 @@ export default function Services() {
 
         <div className="overflow-hidden mb-12 md:mb-16">
           <motion.h2
-            className="font-serif text-4xl md:text-5xl lg:text-7xl text-white leading-none"
+            className="font-serif text-4xl md:text-5xl lg:text-7xl leading-none text-[#00FF41]"
             initial={{ y: 100, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -58,10 +57,10 @@ export default function Services() {
           {services.map((service, i) => (
             <motion.div
               key={service.number}
-              className={`border p-6 md:p-8 transition-all duration-300 group relative overflow-hidden ${
-                service.gold
-                  ? 'border-[#C5A55A]/30 hover:border-[#C5A55A]/60 hover:bg-[#1a1608]'
-                  : 'border-[#1e1e1e] hover:border-[#2e2e2e] hover:bg-[#161616]'
+              className={`border p-6 md:p-8 transition-all duration-300 relative overflow-hidden ${
+                service.red
+                  ? 'border-[#FF0040]/20 hover:border-[#FF0040]/50 hover:bg-[#0d0404]'
+                  : 'border-[#0d2200] hover:border-[#1a3a1a] hover:bg-[#040d04]'
               }`}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -69,7 +68,7 @@ export default function Services() {
             >
               <motion.span
                 className="block font-serif leading-none select-none mb-2 text-7xl md:text-8xl lg:text-[9rem]"
-                style={{ color: service.gold ? '#C5A55A22' : '#1a1a1a' }}
+                style={{ color: service.red ? 'rgba(255,0,64,0.1)' : 'rgba(0,255,65,0.06)' }}
                 whileHover={{ scale: 1.04 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               >
@@ -78,24 +77,24 @@ export default function Services() {
 
               <motion.div
                 className="h-px mb-5 origin-left"
-                style={{ backgroundColor: service.gold ? '#C5A55A' : '#C5A55A' }}
+                style={{ backgroundColor: service.red ? '#FF0040' : '#00FF41' }}
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
               />
 
-              <h3 className={`font-serif text-xl md:text-2xl lg:text-3xl mb-4 ${service.gold ? 'text-[#C5A55A]' : 'text-white'}`}>
+              <h3 className={`font-serif text-xl md:text-2xl lg:text-3xl mb-4 ${service.red ? 'text-[#FF0040]' : 'text-[#00FF41]'}`}>
                 {service.title}
               </h3>
-              <p className="font-sans text-sm text-[#666666] leading-relaxed mb-6">{service.description}</p>
+              <p className="font-sans text-sm text-[#2a5c2a] leading-relaxed mb-6">{service.description}</p>
               <div className="flex flex-wrap gap-2">
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
                     className={`font-sans text-xs px-3 py-1 rounded-full ${
-                      service.gold
-                        ? 'border border-[#C5A55A]/30 text-[#C5A55A]/70'
-                        : 'border border-[#2a2a2a] text-[#555555]'
+                      service.red
+                        ? 'border border-[#FF0040]/25 text-[#FF0040]/60'
+                        : 'border border-[#0d2200] text-[#1a3a1a]'
                     }`}
                   >
                     {tag}

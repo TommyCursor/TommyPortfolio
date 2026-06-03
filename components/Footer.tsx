@@ -7,11 +7,11 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#F8F7F4] px-6 md:px-16 lg:px-24 py-10 border-t border-[#E5E4E0]">
+    <footer className="bg-[#000000] px-6 md:px-16 lg:px-24 py-10 border-t border-[#0d2200]">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <span className="font-serif text-lg sm:text-xl text-[#111111] block mb-1">Tommy Adeyinka</span>
-          <span className="font-sans text-xs text-[#888888]">Developer · Marketer · Automator</span>
+          <span className="font-serif text-lg sm:text-xl text-[#00FF41] block mb-1">Tommy Adeyinka</span>
+          <span className="font-sans text-xs text-[#1a3a1a]">Developer · Marketer · Automator</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-5 sm:gap-6">
@@ -21,14 +21,14 @@ export default function Footer() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs text-[#888888] hover:text-[#111111] transition-colors duration-200 tracking-[0.1em] uppercase"
+              className="font-sans text-xs text-[#1a3a1a] hover:text-[#00FF41] transition-colors duration-200 tracking-[0.1em] uppercase"
             >
               {s.label}
             </a>
           ))}
         </div>
 
-        <span className="font-sans text-xs text-[#BBBBBB]">&copy; 2026</span>
+        <span className="font-sans text-xs text-[#0d2200]">&copy; 2026</span>
       </div>
     </footer>
   )

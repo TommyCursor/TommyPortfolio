@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
+const AVATAR = 'https://avatars.githubusercontent.com/u/256695225?v=4'
 const links = ['About', 'Services', 'Work', 'Contact']
 
 export default function Nav() {
@@ -18,14 +19,30 @@ export default function Nav() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between transition-all duration-300 ${
-        scrolled || menuOpen ? 'bg-[#F8F7F4]/80 backdrop-blur-md border-b border-[#E5E4E0]' : ''
+      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-16 lg:px-24 py-4 flex items-center justify-between transition-all duration-300 ${
+        scrolled || menuOpen
+          ? 'bg-[#080808]/90 backdrop-blur-md border-b border-[#0d2200]'
+          : ''
       }`}
       initial={{ y: -80, opacity: 0 }}
       animate={ready ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
       transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.4 }}
     >
-      <span className="font-serif text-2xl font-medium tracking-tight text-[#111111]">TA</span>
+      {/* Logo — circular avatar */}
+      <a href="#" className="shrink-0">
+        <div className="relative w-9 h-9">
+          <div
+            className="absolute -bottom-1 -right-1 w-full h-full rounded-full pointer-events-none"
+            style={{ border: '1px solid #00FF41', opacity: 0.45 }}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={AVATAR}
+            alt="Tommy Adeyinka"
+            className="w-full h-full rounded-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-300"
+          />
+        </div>
+      </a>
 
       {/* Desktop nav links */}
       <ul className="hidden md:flex gap-8">
@@ -33,7 +50,7 @@ export default function Nav() {
           <li key={link}>
             <a
               href={`#${link.toLowerCase()}`}
-              className="font-sans text-sm text-[#888888] hover:text-[#111111] transition-colors duration-200"
+              className="font-sans text-sm text-[#2a5c2a] hover:text-[#00FF41] transition-colors duration-200 tracking-wide"
             >
               {link}
             </a>
@@ -41,10 +58,10 @@ export default function Nav() {
         ))}
       </ul>
 
-      {/* Desktop CTA — gold accent to stand out as primary action */}
+      {/* Desktop CTA */}
       <a
         href="#contact"
-        className="hidden md:inline-block font-sans text-sm border border-[#C5A55A] text-[#C5A55A] px-5 py-3 hover:bg-[#C5A55A] hover:text-white transition-all duration-200"
+        className="hidden md:inline-block font-sans text-sm bg-[#FF0040] text-white px-5 py-3 hover:bg-[#CC0030] transition-colors duration-200 tracking-wide"
       >
         Book a Call
       </a>
@@ -55,19 +72,19 @@ export default function Nav() {
         onClick={() => setMenuOpen((v) => !v)}
         aria-label="Toggle menu"
       >
-        <span className={`block w-6 h-px bg-[#111111] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-        <span className={`block w-6 h-px bg-[#111111] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-        <span className={`block w-6 h-px bg-[#111111] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+        <span className={`block w-6 h-px bg-[#00FF41] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <span className={`block w-6 h-px bg-[#00FF41] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+        <span className={`block w-6 h-px bg-[#00FF41] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
       </button>
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-[#F8F7F4]/95 backdrop-blur-md border-b border-[#E5E4E0] flex flex-col px-6 py-6 gap-5 md:hidden">
+        <div className="absolute top-full left-0 right-0 bg-[#080808]/95 backdrop-blur-md border-b border-[#0d2200] flex flex-col px-6 py-6 gap-5 md:hidden">
           {links.map((link) => (
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              className="font-sans text-sm text-[#888888] hover:text-[#111111] transition-colors duration-200"
+              className="font-sans text-sm text-[#2a5c2a] hover:text-[#00FF41] transition-colors duration-200"
               onClick={() => setMenuOpen(false)}
             >
               {link}
@@ -75,7 +92,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="font-sans text-sm border border-[#C5A55A] text-[#C5A55A] px-5 py-3 text-center hover:bg-[#C5A55A] hover:text-white transition-all duration-200 mt-2"
+            className="font-sans text-sm bg-[#FF0040] text-white px-5 py-3 text-center hover:bg-[#CC0030] transition-colors duration-200 mt-2"
             onClick={() => setMenuOpen(false)}
           >
             Book a Call

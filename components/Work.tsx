@@ -60,47 +60,47 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   return (
     <motion.div
       ref={ref}
-      className="group border border-[#E5E4E0] p-6 flex flex-col relative overflow-hidden"
+      className="group border border-[#0d2200] p-6 flex flex-col relative overflow-hidden hover:border-[#1a3a1a] transition-colors duration-300"
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.6, delay: (index % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -6 }}
     >
-      {/* Hover fill */}
+      {/* Hover fill — dark green */}
       <motion.div
-        className="absolute inset-0 bg-[#111111] origin-bottom pointer-events-none"
+        className="absolute inset-0 origin-bottom pointer-events-none"
+        style={{ backgroundColor: '#040d04' }}
         initial={{ scaleY: 0 }}
         whileHover={{ scaleY: 1 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      <span className="font-serif text-4xl md:text-5xl text-[#E5E4E0] leading-none relative z-10 group-hover:text-[#2a2a2a] transition-colors duration-300">
+      <span className="font-serif text-4xl md:text-5xl leading-none relative z-10 text-[#0d2200] group-hover:text-[#1a3a1a] transition-colors duration-300">
         {project.number}
       </span>
-      <h3 className="font-serif text-xl md:text-2xl text-[#111111] mt-2 mb-2 relative z-10 group-hover:text-white transition-colors duration-300">
+      <h3 className="font-serif text-xl md:text-2xl text-[#00FF41] mt-2 mb-2 relative z-10 transition-colors duration-300">
         {project.name}
       </h3>
-      <p className="font-sans text-sm text-[#888888] leading-relaxed mb-4 flex-1 relative z-10 group-hover:text-[#999999] transition-colors duration-300">
+      <p className="font-sans text-sm text-[#2a5c2a] leading-relaxed mb-4 flex-1 relative z-10 group-hover:text-[#4d994d] transition-colors duration-300">
         {project.description}
       </p>
       <div className="flex flex-wrap gap-1.5 mb-5 relative z-10">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="font-sans text-xs border border-[#E5E4E0] text-[#888888] px-2.5 py-1 rounded-full group-hover:border-[#2a2a2a] group-hover:text-[#666666] transition-colors duration-300"
+            className="font-sans text-xs border border-[#0d2200] text-[#1a3a1a] px-2.5 py-1 rounded-full group-hover:border-[#1a3a1a] group-hover:text-[#2a5c2a] transition-colors duration-300"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      {/* Links row */}
       <div className="flex items-center gap-4 relative z-10">
         <a
           href={project.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-sans text-xs text-[#111111] flex items-center gap-1.5 group/link w-fit group-hover:text-white transition-colors duration-300"
+          className="font-sans text-xs text-[#00FF41] flex items-center gap-1.5 group/link w-fit transition-colors duration-300"
           onClick={(e) => e.stopPropagation()}
         >
           View Live
@@ -110,7 +110,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-sans text-xs text-[#888888] flex items-center gap-1.5 group/gh w-fit group-hover:text-[#666666] transition-colors duration-300"
+          className="font-sans text-xs text-[#1a3a1a] flex items-center gap-1.5 group/gh w-fit hover:text-[#2a5c2a] transition-colors duration-300"
           onClick={(e) => e.stopPropagation()}
         >
           GitHub
@@ -126,20 +126,19 @@ export default function Work() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="work" className="bg-[#F8F7F4] px-6 md:px-16 lg:px-24 py-20 md:py-28 border-t border-[#E5E4E0]">
+    <section id="work" className="bg-[#080808] px-6 md:px-16 lg:px-24 py-20 md:py-28 border-t border-[#0d2200]">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.p
-          className="font-sans text-xs tracking-[0.2em] uppercase text-[#888888] mb-4"
+          className="font-sans text-xs tracking-[0.2em] uppercase text-[#1a3a1a] mb-4"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           Portfolio
         </motion.p>
-
         <div className="overflow-hidden mb-16">
           <motion.h2
-            className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#111111] leading-none"
+            className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#00FF41] leading-none"
             initial={{ y: 100, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -147,7 +146,6 @@ export default function Work() {
             Selected Work
           </motion.h2>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {projects.map((project, i) => (
             <ProjectCard key={project.number} project={project} index={i} />
