@@ -8,42 +8,48 @@ const projects = [
     name: 'APK Visuals',
     description: 'AI-powered visual generation platform — GPT-4 + ElevenLabs pipeline producing creative content at scale for digital creators.',
     tags: ['AI', 'GPT-4', 'ElevenLabs'],
-    status: 'live',
+    href: 'https://apk-visuals-image-documentary-scrap-five.vercel.app',
+    github: 'https://github.com/TommyCursor/apk-visuals',
   },
   {
     number: '02',
     name: 'Ember Kitchen',
     description: 'Restaurant booking and menu platform with real-time availability, smooth micro-interactions, and a custom CMS for the owner.',
     tags: ['Next.js', 'Supabase', 'Framer Motion'],
-    status: 'live',
+    href: 'https://emberkitchen.vercel.app',
+    github: 'https://github.com/TommyCursor/ember-kitchen',
   },
   {
     number: '03',
     name: 'Hollywood ATL',
     description: 'SaaS financial platform for creative agencies — invoicing, contracts, and analytics dashboards built for non-technical founders.',
     tags: ['SaaS', 'Finance', 'TypeScript'],
-    status: 'live',
+    href: 'https://hollywood-atl-operations.vercel.app',
+    github: 'https://github.com/TommyCursor/hollywood-atl',
   },
   {
     number: '04',
     name: 'PropList',
     description: 'Real estate listing platform with advanced property search, saved filters, and a full agent dashboard — zero third-party listing fees.',
     tags: ['Next.js', 'Real Estate', 'Supabase'],
-    status: 'live',
+    href: 'https://proplist-app.vercel.app',
+    github: 'https://github.com/TommyCursor/proplist',
   },
   {
     number: '05',
     name: 'Harry Clothingz',
     description: 'E-commerce storefront with Stripe payments, product variant management, and a custom checkout — 3-second load on Lighthouse.',
     tags: ['E-commerce', 'Stripe', 'Performance'],
-    status: 'live',
+    href: 'https://harry-clothingz-n-apparel.vercel.app',
+    github: 'https://github.com/TommyCursor/harry-clothingz',
   },
   {
     number: '06',
     name: 'HireBoard',
     description: 'Job board SaaS with employer dashboard, applicant tracking, and Zapier-powered notification workflows for real-time alerts.',
     tags: ['Job Board', 'Supabase', 'Zapier'],
-    status: 'in-progress',
+    href: 'https://jobboard-pied.vercel.app',
+    github: 'https://github.com/TommyCursor/hireboard',
   },
 ]
 
@@ -87,19 +93,30 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           </span>
         ))}
       </div>
-      <span className="font-sans text-xs relative z-10 flex items-center gap-1.5 w-fit">
-        {project.status === 'live' ? (
-          <>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:bg-emerald-400" />
-            <span className="text-[#888888] group-hover:text-[#666666] transition-colors duration-300">Live project</span>
-          </>
-        ) : (
-          <>
-            <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#C5A55A' }} />
-            <span className="text-[#888888] group-hover:text-[#666666] transition-colors duration-300">In development</span>
-          </>
-        )}
-      </span>
+
+      {/* Links row */}
+      <div className="flex items-center gap-4 relative z-10">
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-xs text-[#111111] flex items-center gap-1.5 group/link w-fit group-hover:text-white transition-colors duration-300"
+          onClick={(e) => e.stopPropagation()}
+        >
+          View Live
+          <span className="transition-transform duration-200 group-hover/link:translate-x-1 inline-block">→</span>
+        </a>
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-xs text-[#888888] flex items-center gap-1.5 group/gh w-fit group-hover:text-[#666666] transition-colors duration-300"
+          onClick={(e) => e.stopPropagation()}
+        >
+          GitHub
+          <span className="transition-transform duration-200 group-hover/gh:translate-x-1 inline-block">↗</span>
+        </a>
+      </div>
     </motion.div>
   )
 }

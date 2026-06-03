@@ -23,8 +23,8 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Tommy Adeyinka — Full-Stack Developer & Digital Marketer',
-  description: 'Code that performs. Marketing that compounds.',
+  title: 'Tommy Adeyinka — Developer · Marketer · Automator',
+  description: 'I build production-grade web apps, grow them with technical SEO, and automate the workflows in between. One person. Three disciplines.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,8 @@
 const socials = [
-  { label: 'GitHub',   href: 'https://github.com/TommyCursor' },
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Twitter',  href: '#' },
+  { label: 'GitHub',    href: 'https://github.com/TommyCursor' },
+  { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/work-with-tommy-cursor' },
+  { label: 'Twitter',   href: 'https://x.com/Gogglepixxie' },
+  { label: 'Instagram', href: 'https://www.instagram.com/work.with.tommy' },
 ]
 
 export default function Footer() {
@@ -13,11 +14,13 @@ export default function Footer() {
           <span className="font-sans text-xs text-[#888888]">Developer · Marketer · Automator</span>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-5 sm:gap-6">
           {socials.map((s) => (
             <a
               key={s.label}
               href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-sans text-xs text-[#888888] hover:text-[#111111] transition-colors duration-200 tracking-[0.1em] uppercase"
             >
               {s.label}
