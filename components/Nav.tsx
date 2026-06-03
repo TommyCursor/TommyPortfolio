@@ -41,10 +41,10 @@ export default function Nav() {
         ))}
       </ul>
 
-      {/* Desktop CTA */}
+      {/* Desktop CTA — gold accent to stand out as primary action */}
       <a
         href="#contact"
-        className="hidden md:inline-block font-sans text-sm bg-[#111111] text-white px-5 py-3 hover:bg-[#333333] transition-colors duration-200"
+        className="hidden md:inline-block font-sans text-sm border border-[#C5A55A] text-[#C5A55A] px-5 py-3 hover:bg-[#C5A55A] hover:text-white transition-all duration-200"
       >
         Book a Call
       </a>
@@ -75,7 +75,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="font-sans text-sm bg-[#111111] text-white px-5 py-3 text-center hover:bg-[#333333] transition-colors duration-200 mt-2"
+            className="font-sans text-sm border border-[#C5A55A] text-[#C5A55A] px-5 py-3 text-center hover:bg-[#C5A55A] hover:text-white transition-all duration-200 mt-2"
             onClick={() => setMenuOpen(false)}
           >
             Book a Call

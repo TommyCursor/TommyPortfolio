@@ -6,44 +6,44 @@ const projects = [
   {
     number: '01',
     name: 'APK Visuals',
-    description: 'AI-powered visual generation platform leveraging GPT-4 and ElevenLabs for creative content production.',
+    description: 'AI-powered visual generation platform — GPT-4 + ElevenLabs pipeline producing creative content at scale for digital creators.',
     tags: ['AI', 'GPT-4', 'ElevenLabs'],
-    link: '#',
+    status: 'live',
   },
   {
     number: '02',
     name: 'Ember Kitchen',
-    description: 'Full-featured restaurant booking and menu platform with smooth micro-interactions and real-time availability.',
+    description: 'Restaurant booking and menu platform with real-time availability, smooth micro-interactions, and a custom CMS for the owner.',
     tags: ['Next.js', 'Supabase', 'Framer Motion'],
-    link: '#',
+    status: 'live',
   },
   {
     number: '03',
     name: 'Hollywood ATL',
-    description: 'SaaS financial management platform for creative agencies — invoicing, contracts, and analytics.',
+    description: 'SaaS financial platform for creative agencies — invoicing, contracts, and analytics dashboards built for non-technical founders.',
     tags: ['SaaS', 'Finance', 'TypeScript'],
-    link: '#',
+    status: 'live',
   },
   {
     number: '04',
     name: 'PropList',
-    description: 'Real estate listing platform with property search, filters, and agent dashboard built on Next.js.',
-    tags: ['Next.js', 'Real Estate'],
-    link: '#',
+    description: 'Real estate listing platform with advanced property search, saved filters, and a full agent dashboard — zero third-party listing fees.',
+    tags: ['Next.js', 'Real Estate', 'Supabase'],
+    status: 'live',
   },
   {
     number: '05',
     name: 'Harry Clothingz',
-    description: 'E-commerce storefront with Stripe payments, product management, and custom checkout flow.',
-    tags: ['E-commerce', 'Stripe'],
-    link: '#',
+    description: 'E-commerce storefront with Stripe payments, product variant management, and a custom checkout — 3-second load on Lighthouse.',
+    tags: ['E-commerce', 'Stripe', 'Performance'],
+    status: 'live',
   },
   {
     number: '06',
     name: 'HireBoard',
-    description: 'Job board platform with employer dashboard, applicant tracking, and real-time notifications.',
-    tags: ['Job Board', 'Supabase'],
-    link: '#',
+    description: 'Job board SaaS with employer dashboard, applicant tracking, and Zapier-powered notification workflows for real-time alerts.',
+    tags: ['Job Board', 'Supabase', 'Zapier'],
+    status: 'in-progress',
   },
 ]
 
@@ -60,7 +60,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
       transition={{ duration: 0.6, delay: (index % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -6 }}
     >
-      {/* Hover fill — sweeps up from bottom */}
+      {/* Hover fill */}
       <motion.div
         className="absolute inset-0 bg-[#111111] origin-bottom pointer-events-none"
         initial={{ scaleY: 0 }}
@@ -68,7 +68,6 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      {/* Content — switches color on hover via group */}
       <span className="font-serif text-4xl md:text-5xl text-[#E5E4E0] leading-none relative z-10 group-hover:text-[#2a2a2a] transition-colors duration-300">
         {project.number}
       </span>
@@ -88,13 +87,19 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           </span>
         ))}
       </div>
-      <a
-        href={project.link}
-        className="font-sans text-xs text-[#111111] flex items-center gap-1.5 group/link w-fit relative z-10 group-hover:text-white transition-colors duration-300"
-      >
-        View on GitHub
-        <span className="transition-transform duration-200 group-hover/link:translate-x-1 inline-block">→</span>
-      </a>
+      <span className="font-sans text-xs relative z-10 flex items-center gap-1.5 w-fit">
+        {project.status === 'live' ? (
+          <>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:bg-emerald-400" />
+            <span className="text-[#888888] group-hover:text-[#666666] transition-colors duration-300">Live project</span>
+          </>
+        ) : (
+          <>
+            <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#C5A55A' }} />
+            <span className="text-[#888888] group-hover:text-[#666666] transition-colors duration-300">In development</span>
+          </>
+        )}
+      </span>
     </motion.div>
   )
 }
@@ -115,7 +120,6 @@ export default function Work() {
           Portfolio
         </motion.p>
 
-        {/* Heading sweep */}
         <div className="overflow-hidden mb-16">
           <motion.h2
             className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#111111] leading-none"

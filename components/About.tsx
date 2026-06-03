@@ -9,17 +9,26 @@ const devSkills = [
 
 const marketingSkills = [
   'Technical SEO', 'Programmatic SEO', 'Core Web Vitals',
-  'GTM', 'Twilio', 'Google Analytics', 'Conversion Funnels', 'Automation',
+  'GTM', 'Google Analytics', 'Conversion Funnels', 'Twilio',
 ]
 
-function Tag({ label, delay }: { label: string; delay: number }) {
+const automationSkills = [
+  'n8n', 'Zapier', 'Make.com', 'Webhooks', 'API Integrations',
+  'Airtable', 'Notion API', 'Workflow Design',
+]
+
+function Tag({ label, delay, gold }: { label: string; delay: number; gold?: boolean }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
 
   return (
     <motion.span
       ref={ref}
-      className="inline-block font-sans text-xs border border-[#E5E4E0] text-[#888888] px-3 py-1.5 rounded-full hover:border-[#111111] hover:text-[#111111] transition-colors duration-200"
+      className={`inline-block font-sans text-xs px-3 py-1.5 rounded-full transition-colors duration-200 ${
+        gold
+          ? 'border border-[#C5A55A] text-[#C5A55A] hover:bg-[#C5A55A] hover:text-white'
+          : 'border border-[#E5E4E0] text-[#888888] hover:border-[#111111] hover:text-[#111111]'
+      }`}
       initial={{ opacity: 0, y: 10 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
       transition={{ duration: 0.4, delay }}
@@ -36,18 +45,13 @@ export default function About() {
   return (
     <section id="about" className="relative bg-[#F8F7F4] px-6 md:px-16 lg:px-24 py-20 md:py-28 border-t border-[#E5E4E0] overflow-hidden">
 
-      {/* Large outlined background word */}
       <div
         className="absolute -bottom-8 -left-8 pointer-events-none select-none hidden lg:block"
         aria-hidden
       >
         <motion.span
           className="font-serif leading-none block"
-          style={{
-            fontSize: '28vw',
-            color: 'transparent',
-            WebkitTextStroke: '1px rgba(17,17,17,0.04)',
-          }}
+          style={{ fontSize: '28vw', color: 'transparent', WebkitTextStroke: '1px rgba(17,17,17,0.04)' }}
           initial={{ opacity: 0, x: -60 }}
           animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -68,7 +72,6 @@ export default function About() {
             About
           </motion.p>
 
-          {/* Clip-path heading reveal */}
           <div className="overflow-hidden mb-8">
             <motion.h2
               className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-[#111111]"
@@ -76,18 +79,19 @@ export default function About() {
               animate={inView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
-              Where Engineering<br />Meets Strategy
+              One Person.<br />Three Disciplines.
             </motion.h2>
           </div>
 
           <motion.p
-            className="font-sans text-[#888888] leading-relaxed mb-5 text-sm"
+            className="font-sans text-[#555555] leading-relaxed mb-5 text-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            I&apos;m Tommy Adeyinka — a full-stack developer and digital marketer who bridges both worlds. I build fast,
-            production-grade web applications and then make sure they get found, converting traffic into real business results.
+            Most developers stop at shipping. Most marketers can&apos;t read code. Most automation consultants
+            can&apos;t build the product they&apos;re automating. I do all three — and that gap is where real
+            business value lives.
           </motion.p>
           <motion.p
             className="font-sans text-[#888888] leading-relaxed text-sm"
@@ -95,8 +99,8 @@ export default function About() {
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.35 }}
           >
-            Most developers stop at shipping. Most marketers can&apos;t read code. I live in the gap between them —
-            where technical execution meets growth strategy.
+            I build production-grade applications, engineer the growth systems that bring users in, and wire up
+            the automations that keep everything running — all without the overhead of three separate agencies.
           </motion.p>
         </div>
 
@@ -105,13 +109,23 @@ export default function About() {
           <p className="font-sans text-xs tracking-[0.2em] uppercase text-[#888888] mb-4">Development</p>
           <div className="flex flex-wrap gap-2 mb-8">
             {devSkills.map((skill, i) => (
-              <Tag key={skill} label={skill} delay={i * 0.05} />
+              <Tag key={skill} label={skill} delay={i * 0.04} />
             ))}
           </div>
+
           <p className="font-sans text-xs tracking-[0.2em] uppercase text-[#888888] mb-4">Marketing &amp; SEO</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-8">
             {marketingSkills.map((skill, i) => (
-              <Tag key={skill} label={skill} delay={i * 0.05} />
+              <Tag key={skill} label={skill} delay={i * 0.04} />
+            ))}
+          </div>
+
+          <p className="font-sans text-xs tracking-[0.2em] uppercase mb-4" style={{ color: '#C5A55A' }}>
+            Automation &amp; No-Code
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {automationSkills.map((skill, i) => (
+              <Tag key={skill} label={skill} delay={i * 0.04} gold />
             ))}
           </div>
         </div>
